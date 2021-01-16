@@ -218,6 +218,9 @@ pub enum WindowEvent<'a> {
     /// The window has been requested to close.
     CloseRequested,
 
+    /// The application has been requested to close by the system.
+    EndSession,
+
     /// The window has been destroyed.
     Destroyed,
 
@@ -361,6 +364,7 @@ impl Clone for WindowEvent<'static> {
             Resized(size) => Resized(size.clone()),
             Moved(pos) => Moved(pos.clone()),
             CloseRequested => CloseRequested,
+            EndSession => EndSession,
             Destroyed => Destroyed,
             DroppedFile(file) => DroppedFile(file.clone()),
             HoveredFile(file) => HoveredFile(file.clone()),
@@ -452,6 +456,7 @@ impl<'a> WindowEvent<'a> {
             Resized(size) => Some(Resized(size)),
             Moved(position) => Some(Moved(position)),
             CloseRequested => Some(CloseRequested),
+            EndSession => Some(EndSession),
             Destroyed => Some(Destroyed),
             DroppedFile(file) => Some(DroppedFile(file)),
             HoveredFile(file) => Some(HoveredFile(file)),

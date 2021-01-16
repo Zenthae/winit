@@ -859,6 +859,15 @@ unsafe fn public_window_callback_inner<T: 'static>(
             0
         }
 
+        winuser::WM_ENDSESSION => {
+            use crate::event::WindowEvent::EndSession;
+            subclass_input.send_event(Event::WindowEvent {
+                window_id: RootWindowId(WindowId(window)),
+                event: EndSession,
+            });
+            0
+        }
+
         winuser::WM_DESTROY => {
             use crate::event::WindowEvent::Destroyed;
             ole2::RevokeDragDrop(window);
